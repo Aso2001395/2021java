@@ -54,8 +54,8 @@ public class GameManager {
         
         while(isSet) {
 
-            int pos_x = rd.nextInt(4) + 1;
-            int pos_y = rd.nextInt(4) + 1;
+            int pos_x = rd.nextInt(5) + 1;
+            int pos_y = rd.nextInt(5) + 1;
 
             if(field[pos_y][pos_x] == 0) {
                 field[pos_y][pos_x] = sp.ship_No;
