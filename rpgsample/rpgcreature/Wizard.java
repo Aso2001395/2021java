@@ -12,6 +12,7 @@ public class Wizard extends Monster{
      */
     public Wizard(){
         super("魔法使い",30);
+        this.gold = 300;
     }
 
     /**

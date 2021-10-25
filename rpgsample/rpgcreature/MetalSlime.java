@@ -13,6 +13,7 @@ public class MetalSlime extends Monster{
      */
     public MetalSlime(){
         super("メタルスライム",12);
+        this.gold = 120;
     }
 
     /**

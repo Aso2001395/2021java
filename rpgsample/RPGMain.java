@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import rpgcreature.Braver;
+import rpgcreature.Golem;
 import rpgcreature.Slime;
 import rpgcreature.Wizard;
 import rpgcreature.MetalSlime;
@@ -15,6 +16,13 @@ public class RPGMain {
     private final int COMMAND_BATTLE=1;
     private final int COMMAND_RECOVERY=2;
 
+    private final int SlimeNum = 0;
+    private final int WizardNum = 1;
+    private final int MetalSlimeNum = 2;
+    private final int GolemNum = 3;
+
+    private int totalGold;
+    private int turn;
     private Braver braver;
     private Monster[] monsters;
     public static void main(String[] args){
@@ -46,10 +54,18 @@ public class RPGMain {
 
         //メインループ（無限ループ）
         while(true){
+            //現在のターン数
+            dispTurn();
             //現在の状態を表示
             dispStatus();
             //入力されたコマンドを取得
             int command = sc.nextInt();
+
+            while(command != COMMAND_BATTLE && command != COMMAND_RECOVERY) {
+                System.out.println("1または2を入力してください");
+                command = sc.nextInt();
+            }
+            
             if( command == COMMAND_BATTLE ){
                 //たたかう
                 if( !battle() ){
@@ -61,6 +77,7 @@ public class RPGMain {
             }
         }
 
+        dispTotalGold();
         sc.close();
     }
 
@@ -93,6 +110,16 @@ public class RPGMain {
         System.out.println("どうしますか？1:たたかう 2:回復");
     }
 
+    //現在のターン数を表示
+    private void dispTurn() {
+        System.out.printf("====%dターン目====\n",++turn);
+    }
+
+    //戦闘終了後の獲得ゴールド表示
+    private void dispTotalGold() {
+        System.out.printf("獲得ゴールド：%s",totalGold);
+    }
+
     /**
      * モンスターを3体決定する
      */
@@ -101,13 +128,15 @@ public class RPGMain {
         monsters = new Monster[MONSTER_NUM];
         for(int i=0; i < MONSTER_NUM; i++){
             //乱数を取得してモンスターを決定する
-            int value = r.nextInt(3);
-            if( value == 0 ){
+            int value = r.nextInt(4);
+            if( value == SlimeNum ){
                 monsters[i] = new Slime();
-            }else if( value == 1){
+            }else if( value == WizardNum){
                 monsters[i] = new Wizard();
-            }else{
+            }else if( value == MetalSlimeNum){
                 monsters[i] = new MetalSlime();
+            } else if(value == GolemNum){
+                monsters[i] = new Golem();
             }
         }
         
@@ -136,6 +165,7 @@ public class RPGMain {
         braver.attack(monster);
         if( !monster.isAlive() ){
             System.out.printf("%sを倒した！\n",monster.getName());
+            totalGold += monster.gold;
         }
         
         //3体居なくなった？
@@ -146,8 +176,7 @@ public class RPGMain {
 
         //モンスター→主人公からの攻撃 
         for(int i=0; i < MONSTER_NUM; i++){
-            monster = monsters[i]; //修正箇所
-            if(monster.isThere()) { //修正箇所
+            if(monsters[i].isThere()) { //修正箇所
                 monsters[i].attack(braver);
             }
         }

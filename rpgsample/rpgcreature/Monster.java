@@ -5,6 +5,7 @@ package rpgcreature;
  */
 public abstract class Monster extends Creature{
     protected boolean escapeFlag = false;
+    public int gold;
 
     /**
      * モンスタークラスのコンストラクタ

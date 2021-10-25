@@ -2,17 +2,13 @@ package rpgcreature;
 
 import java.util.Random;
 
-/**
- * スライムクラス
- */
-public class Slime extends Monster{
-
+public class Golem extends Monster{
     /**
-     * スライムクラスのコンストラクタ
+     * ゴーレムクラスのコンストラクタ
      */
-    public Slime(){
-        super("スライム",12);
-        this.gold = 120;
+    public Golem(){
+        super("ゴーレム",100);
+        this.gold = 1000;
     }
 
     /**
@@ -23,7 +19,12 @@ public class Slime extends Monster{
     public void attack(Creature opponent) {
         
         Random r = new Random();
-        int damage = r.nextInt(5);
+        int damage = 0;
+        if(r.nextInt(100) < 5) {
+            damage = 30;
+        } else {
+            damage = r.nextInt(6) + 5;
+        }
         System.out.printf("%sの攻撃！\n",getName());
         
         opponent.damaged(damage);
@@ -31,5 +32,4 @@ public class Slime extends Monster{
         displayMessage(opponent,damage);
         
     }
-    
 }
