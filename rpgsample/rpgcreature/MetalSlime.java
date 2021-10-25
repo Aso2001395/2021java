@@ -12,7 +12,7 @@ public class MetalSlime extends Monster{
      * メタルスライムのコンストラクタ
      */
     public MetalSlime(){
-        super("メタルスライム",12);
+        super("メタルスライム",12,0);
         this.gold = 120;
     }
 
@@ -31,6 +31,10 @@ public class MetalSlime extends Monster{
             int damage = r.nextInt(5);
             System.out.printf("%sの攻撃！\n",getName());
             
+            damage -= opponent.defense;
+            if(damage < 0) {
+                damage = 1;
+            }
             opponent.damaged(damage);
             
             displayMessage(opponent,damage);

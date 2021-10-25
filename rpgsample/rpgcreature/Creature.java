@@ -7,15 +7,17 @@ package rpgcreature;
 public abstract class Creature {
     private String name;
     protected int hp;
+    protected int defense;
 
     /**
      * コンストラクタ
      * @param name：名前
      * @param hp：最大HP
      */
-    public Creature(String name,int hp){
+    public Creature(String name,int hp,int defense){
         this.name = name;
         this.hp = hp;
+        this.defense = defense;
     }
 
     /**

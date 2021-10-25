@@ -7,7 +7,7 @@ public class Golem extends Monster{
      * ゴーレムクラスのコンストラクタ
      */
     public Golem(){
-        super("ゴーレム",100);
+        super("ゴーレム",100,0);
         this.gold = 1000;
     }
 
@@ -27,6 +27,10 @@ public class Golem extends Monster{
         }
         System.out.printf("%sの攻撃！\n",getName());
         
+        damage -= opponent.defense;
+        if(damage < 0) {
+            damage = 1;
+        }
         opponent.damaged(damage);
         
         displayMessage(opponent,damage);

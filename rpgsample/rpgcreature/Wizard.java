@@ -11,7 +11,7 @@ public class Wizard extends Monster{
      * 魔法使いのコンストラクタ
      */
     public Wizard(){
-        super("魔法使い",30);
+        super("魔法使い",30,0);
         this.gold = 300;
     }
 
@@ -30,6 +30,10 @@ public class Wizard extends Monster{
         }else{
             System.out.printf("%sの攻撃！\n",getName());
             damage = r.nextInt(5)+1;
+        }
+        damage -= opponent.defense;
+        if(damage < 0) {
+            damage = 1;
         }
         opponent.damaged(damage);
         

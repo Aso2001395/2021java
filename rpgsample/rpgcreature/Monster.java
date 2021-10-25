@@ -12,8 +12,8 @@ public abstract class Monster extends Creature{
      * @param name　名前
      * @param hp　モンスターの体力
      */
-    public Monster(String name,int hp){
-        super(name,hp);
+    public Monster(String name,int hp,int defense){
+        super(name,hp,defense);
     }
 
     /**

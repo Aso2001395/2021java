@@ -9,12 +9,13 @@ public class Braver extends Creature{
     private final static int MAX_HP = 100;
     private final static int RECOVERY_POINT = 20;
     private final static int CRITICAL_HIT_RATE = 10;
+    private final static int defense = 1000;
 
     /**
      * 勇者クラスのコンストラクタ
      */
     public Braver(String name){
-        super(name,MAX_HP);
+        super(name,MAX_HP,defense);
     }
     
     /**
@@ -35,6 +36,10 @@ public class Braver extends Creature{
         }else{
             damage = r.nextInt(10)+1;
             
+        }
+        damage -= opponent.defense;
+        if(damage < 0) {
+            damage = 1;
         }
         opponent.damaged(damage);
         
